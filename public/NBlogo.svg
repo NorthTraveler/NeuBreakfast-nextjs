@@ -1,0 +1,10 @@
+<svg width="700" height="80" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <text transform="rotate(-0.163278 283.305 41.7444) matrix(3.25039 0 0 3.34774 213.818 211.033)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="'Alegreya'" font-size="21" id="svg_2" y="-43.54914" x="-37.18069" stroke-width="0" fill="#ff7f00">NeuBreakfast</text>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="-268" x2="0.99998" y1="-268" x1="-0.00002" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="-242" x2="34.99998" y1="-282" x1="39.99998" stroke="#000" fill="none"/>
+  <path stroke="#000" id="svg_6" d="m80.31575,40.63967l-9.41407,-9.13062l0,-21.80672l-8.07052,0l0,13.9792l-18.83122,-18.26421l-36.31581,35.22235l8.64545,-0.19979l0,35.61l54.95642,0l0,-35.41021l9.02976,0zm-36.31581,30.3171l-17.93347,0l0,-20.87339l17.93347,0l0,20.87339zm17.42311,-8.94574l-11.7845,0l0,-12.05289l11.7845,0l0,12.05289z" stroke-width="0" fill="#33666C"/>
+ </g>
+</svg>
