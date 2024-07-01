@@ -30,3 +30,28 @@ export type Order={
     takeuserid:string;
     finished:boolean;
 };
+
+export type LatestOrder ={
+    id:string;
+    pubuserid:string;
+    pubtime:string;
+    content:string;
+    destination:string;
+    timeset:string;
+    longterm:boolean;
+    takeorder:boolean;
+    taketime:string;
+    takeuserid:string;
+    finished:boolean;   
+
+}
+
+export type UserField = {
+    id:string;
+    username:string;
+
+}
+
+export type foodcard ={
+    
+}   

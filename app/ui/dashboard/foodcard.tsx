@@ -1,5 +1,4 @@
 
-import { fetchFoodCardData } from '../app/lib/data';
 
 export default function FoodCard(){
 

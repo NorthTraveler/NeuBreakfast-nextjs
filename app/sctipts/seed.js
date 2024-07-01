@@ -31,7 +31,7 @@ async function seedUsers(client){
                 `;
             })
         );
-        console.log(`Seeded ${insertedUsers.length} users`);
+        console.log(`传入 ${insertedUsers.length} 用户`);
 
         return {
             createTable,
@@ -70,43 +70,69 @@ async function seedFoods(client) {
                 `
             ),
         );
+        console.log(`传入 ${insertedFoods.length} invoices`)
+        return {
+            createTable,
+            foods:insertedFoods,
+        }
     } catch(error){
         console.error('插入食物表出错:',error);
         throw error;
     }}
 
-    async function seedOrders(client) {
-        try{
-            await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+async function seedOrders(client) {
+    try{
+        await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     
-            const  createTable =await client.sql`
-            CREATE TABLE IF NOT EXISTS orders (
-                id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-                pubtime DATETIME NOT NULL,
-                ordercontent TEXT NOT NULL,
-                orderdestination VARCHAR(255) NOT NULL,
-                orderterm DATETIME,
-                longterm BOOLEAN NOT NULL,
-                pubuserid VARCHAR(255) NOT NULL,
-                ordertaked BOOLEAN,
-                ordertaketime DATETIME,
-                takeuserid VARCHAR(255),
-                orderfinished BOOLEAN,
-            );
+        const  createTable =await client.sql`
+        CREATE TABLE IF NOT EXISTS orders (
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+            pubtime DATETIME NOT NULL,
+            ordercontent TEXT NOT NULL,
+            orderdestination VARCHAR(255) NOT NULL,
+            orderterm DATETIME,
+            longterm BOOLEAN NOT NULL,
+            pubuserid VARCHAR(255) NOT NULL,
+            ordertaked BOOLEAN,
+            ordertaketime DATETIME,
+            takeuserid VARCHAR(255),
+            orderfinished BOOLEAN,
+        );
             `;
     
-            console.log(`创建oreders表成功`);
+        console.log(`创建oreders表成功`);
     
-            const insertedFoods = await Promise.all(
-                foods.map(
-                    (order) => client.sql`
-                    INSERT INTO customers (id, pubtime, ordercontent, orderdestination, orderterm, longterm)
-                    VALUES(${order.id},${order.pubtime},${order.ordercontent},${order.orderdestination},${order.image_url})
-                    ON CONFLICT (id) DO NOTHING;
-                    `
-                ),
-            );
+        const insertedOrders = await Promise.all(
+            orders.map(
+                (order) => client.sql`
+                INSERT INTO customers (id, pubtime, ordercontent, orderdestination, orderterm, longterm,pubuserid,ordertaked,ordertaketime,takeuserid,orderfinished)
+                VALUES(${order.id},${order.pubtime},${order.ordercontent},${order.orderdestination},${order.orderterm},${order.longterm},${order.longterm},${order.pubuserid},${order.ordertaked},${order.ordertaketime},${order.takeuserid},${order.finished})
+                ON CONFLICT (id) DO NOTHING;
+                `
+            ),
+        );
+
+        console.log(`传入 ${insertedOrders.length} invoices`)
+        return {
+            createTable,
+            orders:insertedOrders,
+        }
         } catch(error){
             console.error('插入订单表出错:',error);
             throw error;
         }}  
+
+async function main(){
+        const client = await db.connect();
+        await seedUsers(client);
+        await seedFoods(client);
+        await seedOrders(client);
+
+        await client.end();
+}
+main().catch((err) => {
+  console.error(
+    '尝试传递数据库数据时出现错误:',
+    err,
+  );
+});
